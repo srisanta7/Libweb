@@ -15,9 +15,10 @@ interface BookCardProps {
   onEdit?: (book: any) => void | Promise<void>;
   onDelete?: (id: string) => void | Promise<void>;
   onBorrow?: (id: string) => void | Promise<void>;
+  onReturn?: (id: string) => void | Promise<void>;
 }
 
-export const BookCard: React.FC<BookCardProps> = ({ book, onEdit, onDelete, onBorrow }) => {
+export const BookCard: React.FC<BookCardProps> = ({ book, onEdit, onDelete, onBorrow, onReturn }) => {
   const { isAdmin } = useAuth();
 
   return (
@@ -52,18 +53,28 @@ export const BookCard: React.FC<BookCardProps> = ({ book, onEdit, onDelete, onBo
               </button>
             </>
           ) : (
-            <button
-              onClick={() => onBorrow?.(book.id)}
-              disabled={book.availableCopies === 0}
-              className={`inline-flex items-center px-3 py-1.5 border border-transparent shadow-sm text-xs font-medium rounded text-white focus:outline-none ${
-                book.availableCopies > 0
-                  ? 'bg-indigo-600 hover:bg-indigo-700'
-                  : 'bg-gray-400 cursor-not-allowed'
-              }`}
-            >
-              <BookUp className="w-3.5 h-3.5 mr-1.5" />
-              Borrow
-            </button>
+            <div className="flex space-x-2">
+              <button
+                onClick={() => onBorrow?.(book.id)}
+                disabled={book.availableCopies === 0}
+                className={`inline-flex items-center px-3 py-1.5 border border-transparent shadow-sm text-xs font-medium rounded text-white focus:outline-none ${
+                  book.availableCopies > 0
+                    ? 'bg-indigo-600 hover:bg-indigo-700'
+                    : 'bg-gray-400 cursor-not-allowed'
+                }`}
+              >
+                <BookUp className="w-3.5 h-3.5 mr-1.5" />
+                Borrow
+              </button>
+              {onReturn && (
+                <button
+                  onClick={() => onReturn?.(book.id)}
+                  className="inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none"
+                >
+                  Return
+                </button>
+              )}
+            </div>
           )}
         </div>
       </div>

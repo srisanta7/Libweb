@@ -12,6 +12,7 @@ import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Dashboard } from './pages/Dashboard';
 import { Books } from './pages/Books';
+import { Home } from './pages/Home';
 
 function App() {
   return (
@@ -27,13 +28,18 @@ function App() {
               
               {/* Protected Routes */}
               <Route element={<ProtectedRoute />}>
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/home" element={<Home />} />
                 <Route path="/books" element={<Books />} />
               </Route>
               
-              {/* Redirect root to dashboard or login */}
-              <Route path="/" element={<Navigate to="/dashboard" replace />} />
-              <Route path="*" element={<Navigate to="/dashboard" replace />} />
+              {/* Admin Routes */}
+              <Route element={<ProtectedRoute requireAdmin={true} />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+              </Route>
+              
+              {/* Redirect root to home or login */}
+              <Route path="/" element={<Navigate to="/home" replace />} />
+              <Route path="*" element={<Navigate to="/home" replace />} />
             </Routes>
           </main>
         </div>

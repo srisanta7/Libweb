@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setRole(role);
     localStorage.setItem('token', token);
     localStorage.setItem('role', role);
-    navigate('/dashboard');
+    navigate('/home');
   };
 
   const logout = () => {

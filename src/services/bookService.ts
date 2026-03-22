@@ -30,8 +30,8 @@ export const borrowBook = async (bookId: string) => {
   return response.data;
 };
 
-export const returnBook = async (recordId: string) => {
-  const response = await api.post(`/api/borrow/return/${recordId}`);
+export const returnBook = async (bookId: string) => {
+  const response = await api.post(`/api/return/${bookId}`);
   return response.data;
 };
 

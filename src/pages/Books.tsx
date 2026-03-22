@@ -75,6 +75,16 @@ export const Books = () => {
     }
   };
 
+  const handleReturn = async (id: string) => {
+    try {
+      await bookService.returnBook(id);
+      alert('Book returned successfully!');
+      fetchBooks();
+    } catch (err) {
+      alert('Failed to return book');
+    }
+  };
+
   const openModal = (book?: any) => {
     if (book) {
       setEditingBook(book);
@@ -166,6 +176,7 @@ export const Books = () => {
                   onEdit={isAdmin ? openModal : undefined}
                   onDelete={isAdmin ? handleDelete : undefined}
                   onBorrow={!isAdmin ? handleBorrow : undefined}
+                  onReturn={!isAdmin ? handleReturn : undefined}
                 />
               ))}
             </div>

@@ -7,7 +7,7 @@ export const Dashboard = () => {
   const { role } = useAuth();
   const [stats, setStats] = useState({
     totalBooks: 0,
-    availableBooks: 0,
+    totalUsers: 0,
     borrowedBooks: 0,
     overdueBooks: 0,
   });
@@ -21,7 +21,7 @@ export const Dashboard = () => {
         // Fallback for mock data if backend isn't ready
         setStats(data || {
           totalBooks: 1245,
-          availableBooks: 980,
+          totalUsers: 980,
           borrowedBooks: 265,
           overdueBooks: 12,
         });
@@ -31,7 +31,7 @@ export const Dashboard = () => {
         // Mock data for display purposes
         setStats({
           totalBooks: 1245,
-          availableBooks: 980,
+          totalUsers: 980,
           borrowedBooks: 265,
           overdueBooks: 12,
         });
@@ -45,7 +45,7 @@ export const Dashboard = () => {
 
   const statCards = [
     { name: 'Total Books', stat: stats.totalBooks, icon: Book, color: 'text-blue-600', bg: 'bg-blue-100' },
-    { name: 'Available Books', stat: stats.availableBooks, icon: CheckCircle, color: 'text-green-600', bg: 'bg-green-100' },
+    { name: 'Total Users', stat: stats.totalUsers, icon: CheckCircle, color: 'text-green-600', bg: 'bg-green-100' },
     { name: 'Borrowed Books', stat: stats.borrowedBooks, icon: Clock, color: 'text-yellow-600', bg: 'bg-yellow-100' },
     { name: 'Overdue Books', stat: stats.overdueBooks, icon: AlertTriangle, color: 'text-red-600', bg: 'bg-red-100' },
   ];
