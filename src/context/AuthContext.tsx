@@ -19,11 +19,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate();
 
   const login = async (credentials: any) => {
-    const data = await authService.login(credentials);
-    setToken(data.token);
-    setRole(data.role);
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('role', data.role);
+    const response = await authService.login(credentials);
+    const token = response.data?.token || response.token;
+    const role = response.data?.role || response.role;
+    
+    setToken(token);
+    setRole(role);
+    localStorage.setItem('token', token);
+    localStorage.setItem('role', role);
     navigate('/dashboard');
   };
 

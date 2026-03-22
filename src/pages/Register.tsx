@@ -4,8 +4,7 @@ import * as authService from '../services/authService';
 import { BookOpen } from 'lucide-react';
 
 export const Register = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -16,7 +15,7 @@ export const Register = () => {
     setError('');
     setIsLoading(true);
     try {
-      await authService.register({ name, email, password });
+      await authService.register({ username, password });
       navigate('/login');
     } catch (err: any) {
       setError(err.response?.data?.message || 'Failed to register. Please try again.');
@@ -49,27 +48,15 @@ export const Register = () => {
               </div>
             )}
             <div>
-              <label className="block text-sm font-medium text-gray-700">Full Name</label>
+              <label className="block text-sm font-medium text-gray-700">Username</label>
               <div className="mt-1">
                 <input
                   type="text"
                   required
+                  placeholder="Enter your username"
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Email address</label>
-              <div className="mt-1">
-                <input
-                  type="email"
-                  required
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </div>
             </div>
